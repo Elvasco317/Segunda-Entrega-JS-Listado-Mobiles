@@ -1,0 +1,13 @@
+body {
+    background: rgb(0, 0, 0);
+    background: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(141, 29, 253, 1) 50%, rgba(252, 69, 69, 1) 100%);
+    ;
+}
+
+h1,
+h2 {
+    padding: 10;
+    font-family: 'Play', sans-serif;
+    font-family: 'Sometype Mono', monospace;
+    color: aliceblue;
+}

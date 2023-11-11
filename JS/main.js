@@ -48,7 +48,7 @@ const productos = [
     motorolaMotoG,
     samsungJ7,
 ];
-//AGREGAMOS IVA A LOS PRECIOS
+
 for (const el of productos) {
     el.precio *= 1.21;
 }

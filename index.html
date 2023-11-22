@@ -2,22 +2,38 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Play&family=Sometype+Mono&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./CSS/style.css">
-    <title>Celular Dealer</title>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link rel="stylesheet" href="css/estilos.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans&family=Play&family=Sometype+Mono&display=swap"
+		rel="stylesheet">
+	<title>Anotador de Tareas</title>
 </head>
 
 <body>
-    <h1> Bienvenido a Celular Dealer 📱</h1>
-    <h2> No olvide abrir su consola 📟</h2>
+	<h1> 🏷️ Anotador de Tareas</h1>
 
-    <script src="./JS/main.js">
+	<div class="principal">
+		<div class="wrap">
+			<form class="formulario" action="">
+				<input type="text" id="tareaInput" placeholder="Agrega tu tarea">
+				<input type="button" class="boton" id="btn-agregar" value="Agregar Tarea">
+			</form>
+		</div>
+	</div>
 
-    </script>
+	<div class="tareas">
+		<div class="wrap">
+			<ul class="lista" id="lista">
+				<li><a href="#">Realizar mas repasos y practicas de Java Script</Script></a></li>
+				<li><a href="#">Crear mi portfolio terminado el curso</Script></a></li>
+			</ul>
+		</div>
+	</div>
+	<script src="js/main.js"></script>
 </body>
 
 </html>

@@ -4,56 +4,66 @@
 		tareaInput = document.getElementById("tareaInput"),
 		btnNuevaTarea = document.getElementById("btn-agregar");
 
-	// Funciones
-	let agregarTarea = function () {
-		let tarea = tareaInput.value,
-			nuevaTarea = document.createElement("li"),
-			enlace = document.createElement("a"),
-			contenido = document.createTextNode(tarea);
+	// Objeto para almacenar las tareas
+	let tareas = [];
 
-		if (tarea === "") {
-			tareaInput.setAttribute("placeholder", "Agrega una tarea valida");
+	// Función constructora para las tareas
+	function Tarea(nombre) {
+		this.nombre = nombre;
+	}
+
+	// Método para agregar tarea al objeto
+	function agregarTarea() {
+		let nombreTarea = tareaInput.value.trim();
+
+		if (nombreTarea === "") {
+			tareaInput.setAttribute("placeholder", "Agrega una tarea válida");
 			tareaInput.className = "error";
 			return false;
 		}
 
-		// Agregamos el contenido al enlace
-		enlace.appendChild(contenido);
-		// Le establecemos un atributo href
-		enlace.setAttribute("href", "#");
-		// Agrergamos el enlace (a) a la nueva tarea (li)
-		nuevaTarea.appendChild(enlace);
-		// Agregamos la nueva tarea a la lista
-		lista.appendChild(nuevaTarea);
+		let nuevaTarea = new Tarea(nombreTarea);
+		tareas.push(nuevaTarea);
+
+		// Actualizar la lista visual
+		actualizarLista();
 
 		tareaInput.value = "";
-
-		for (let i = 0; i <= lista.children.length - 1; i++) {
-			lista.children[i].addEventListener("click", function () {
-				this.parentNode.removeChild(this);
-			});
-		}
-
-	};
-	let comprobarInput = function () {
 		tareaInput.className = "";
 		tareaInput.setAttribute("placeholder", "Agrega tu tarea");
-	};
+	}
 
-	let eleminarTarea = function () {
-		this.parentNode.removeChild(this);
-	};
+	// Método para actualizar la lista visual
+	function actualizarLista() {
+		lista.innerHTML = ""; // Limpiar la lista antes de volver a crearla
+
+		// Recorrer el array de tareas y crear elementos de lista por cada tarea
+		tareas.forEach(function (tarea, index) {
+			let nuevaTarea = document.createElement("li"),
+				enlace = document.createElement("a"),
+				contenido = document.createTextNode(tarea.nombre);
+
+			enlace.appendChild(contenido);
+			enlace.setAttribute("href", "#");
+			nuevaTarea.appendChild(enlace);
+			lista.appendChild(nuevaTarea);
+
+			// Agregar evento para eliminar la tarea al hacer clic
+			enlace.addEventListener("click", function () {
+				tareas.splice(index, 1); // Eliminar la tarea del array
+				actualizarLista(); // Actualizar la lista visual
+			});
+		});
+	}
 
 	// Eventos
-
-	// Agregar Tarea
 	btnNuevaTarea.addEventListener("click", agregarTarea);
 
-	// Comprobar Input
-	tareaInput.addEventListener("click", comprobarInput);
+	tareaInput.addEventListener("click", function () {
+		tareaInput.className = "";
+		tareaInput.setAttribute("placeholder", "Agrega tu tarea");
+	});
 
-	// Borrando Elementos de la lista
-	for (var i = 0; i <= lista.children.length - 1; i++) {
-		lista.children[i].addEventListener("click", eleminarTarea);
-	}
-}());
+	// Inicializar la lista
+	actualizarLista();
+})();

@@ -4,15 +4,20 @@
 		tareaInput = document.getElementById("tareaInput"),
 		btnNuevaTarea = document.getElementById("btn-agregar");
 
-	// Objeto para almacenar las tareas
-	let tareas = [];
+	// Obtener tareas del Local Storage o inicializar un array vacío
+	let tareas = JSON.parse(localStorage.getItem('tareas')) || [];
 
 	// Función constructora para las tareas
 	function Tarea(nombre) {
 		this.nombre = nombre;
 	}
 
-	// Método para agregar tarea al objeto
+	// Método para guardar las tareas en el Local Storage
+	function guardarTareas() {
+		localStorage.setItem('tareas', JSON.stringify(tareas));
+	}
+
+	// Método para agregar tarea al objeto y actualizar el Local Storage
 	function agregarTarea() {
 		let nombreTarea = tareaInput.value.trim();
 
@@ -25,7 +30,7 @@
 		let nuevaTarea = new Tarea(nombreTarea);
 		tareas.push(nuevaTarea);
 
-		// Actualizar la lista visual
+		guardarTareas(); // Guardar en Local Storage
 		actualizarLista();
 
 		tareaInput.value = "";
@@ -33,11 +38,10 @@
 		tareaInput.setAttribute("placeholder", "Agrega tu tarea");
 	}
 
-	// Método para actualizar la lista visual
+	// Método para actualizar la lista visual y el Local Storage
 	function actualizarLista() {
 		lista.innerHTML = ""; // Limpiar la lista antes de volver a crearla
 
-		// Recorrer el array de tareas y crear elementos de lista por cada tarea
 		tareas.forEach(function (tarea, index) {
 			let nuevaTarea = document.createElement("li"),
 				enlace = document.createElement("a"),
@@ -48,10 +52,10 @@
 			nuevaTarea.appendChild(enlace);
 			lista.appendChild(nuevaTarea);
 
-			// Agregar evento para eliminar la tarea al hacer clic
 			enlace.addEventListener("click", function () {
-				tareas.splice(index, 1); // Eliminar la tarea del array
-				actualizarLista(); // Actualizar la lista visual
+				tareas.splice(index, 1);
+				guardarTareas(); // Guardar en Local Storage
+				actualizarLista();
 			});
 		});
 	}
